@@ -1,10 +1,36 @@
 import {useState} from 'react'
-import {Container, Button, Grid, TextField, Typography} from '@material-ui/core'
+import {
+  Container, 
+  Button, 
+  Grid, 
+  TextField,  
+  Typography,
+  makeStyles
+} from '@material-ui/core'
 import { connectToDatabase } from '../util/mongodb'
 
-//Component
+//Componentes
+import Home from './home'
+
+//Estilos
+const Styles = makeStyles({
+  container:{
+    height:"100vh",
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems:'center',
+    overflow: 'hidden',
+    margin: '0px',
+    background: '#424242'
+  },
+  fieldset:{
+    padding:"1.5rem",
+    backgroundColor: "#949494"
+  }
+})
 
 const Login =({funcionarios}) => {
+  //Estados para verificação e validação de login
   const [user, setUser] = useState({
     isLogged: false,
     username: "",
@@ -12,6 +38,10 @@ const Login =({funcionarios}) => {
     status: false
   })
 
+  // Constante dos estilos
+  const style = Styles()
+
+  // função para inserir o valor digitado nos estados
   const insertCredentials = (event) =>{
     const value = event.target.value
     const key = event.target.name
@@ -20,9 +50,11 @@ const Login =({funcionarios}) => {
       [key]: value
     }))
   }
+
+  // Função para recuperar os dados no Mongo e confrontar 
+  // com os dados digitados
   const loginAuth = () =>{
     const list_func = JSON.parse(funcionarios)
-
     let userLogged
     list_func.map( e =>{
       if(e.nome === user.username){
@@ -34,20 +66,27 @@ const Login =({funcionarios}) => {
     !userLogged ? setUser({status:true}) : setUser({username: userLogged, isLogged: true})
   }
 
+
+  //Validação e redirecionamento para caso os dados sejam validos
+  //Futuramente deverá ser adicionado um método para 
+  //configurar uma session no navegador, incluindo tempo de
+  //cooldown
   if (user.isLogged) return <Home user={user.username} />
   if(!user.isLogged){ 
+
+  //Formulário 
   return (
     <>
-      <Container>
+      <Container classes={{root:style.container}}>
         <form>
-          <fieldset>
+          <fieldset className={style.fieldset}>
             <legend></legend>
             <Grid container spacing={2} alignItems="center" justify="center" >
                 <Grid item>
-                  <TextField label="Username" variant="outlined" onChange={insertCredentials} name="username" />
+                  <TextField label="Username" variant="filled" onChange={insertCredentials} name="username" />
                 </Grid>
                 <Grid item>
-                <TextField label="Password" variant="outlined" onChange={insertCredentials} name="pass" />
+                <TextField label="Password" variant="filled" onChange={insertCredentials} name="pass" />
                 </Grid>
                 <Grid item>
                   <Button variant="outlined" onClick={loginAuth} >Logar</Button>
@@ -61,6 +100,9 @@ const Login =({funcionarios}) => {
   )}
 }
 
+
+// Método para fazer o server-side e trazer os dados do banco
+// e encaminhar para o componente via props
 export async function getServerSideProps(context) {
   const { db } = await connectToDatabase()
 
