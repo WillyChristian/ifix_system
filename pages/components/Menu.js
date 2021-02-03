@@ -7,6 +7,7 @@ import {
 import Adm from "../adm";
 import Cliente from "../cliente";
 import OrdemServico from "../os";
+import Vendas from "../vendas";
 
 //Estilos
 const style = makeStyles({
@@ -39,6 +40,7 @@ export default function Menu({loggedUser, setpage}) {
                 <li onClick={() => setpage(<OrdemServico/>)}><a href="#">Ordens de Serviço</a></li>
                 <li onClick={() => setpage(<Cliente/>)}><a href="#">Clientes</a></li>
                 <li onClick={() => setpage(<Adm/>)}><a href="#">Administrativo</a></li>
+                <li onClick={() => setpage(<Vendas/>)}><a href="#">Vendas</a></li>
             </ul>
             <span>
                 Olá,{loggedUser.nome}
