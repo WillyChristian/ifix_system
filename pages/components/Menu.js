@@ -1,11 +1,9 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core";
 
-//Componentes
-import Adm from "../adm";
-import Cliente from "../cliente";
-import OrdemServico from "../os";
-import Vendas from "../vendas";
+// pages
+import Clientes from "../client/criar";
+import Listar from "../client/listar";
 
 //Estilos
 const style = makeStyles({
@@ -38,8 +36,11 @@ export default function Menu({ loggedUser, setpage }) {
 				<li onClick={() => setpage(<OrdemServico />)}>
 					<a href='#'>Ordens de Serviço</a>
 				</li>
-				<li onClick={() => setpage(<Cliente />)}>
+				<li onClick={() => setpage(<Clientes />)}>
 					<a href='#'>Clientes</a>
+				</li>
+				<li onClick={() => setpage(<Listar />)}>
+					<a href='#'>LIstar Cliente</a>
 				</li>
 				<li onClick={() => setpage(<Adm />)}>
 					<a href='#'>Administrativo</a>

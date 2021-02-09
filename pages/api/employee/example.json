@@ -1,0 +1,12 @@
+{
+	"_id": "",
+	"name": "",
+	"store": "",
+	"pass_code": "",
+	"nick_name": "",
+	"salles": [
+		{
+			"product_name": ""
+		}
+	]
+}

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Container, makeStyles, TextField } from "@material-ui/core";
+import { Button, makeStyles, TextField } from "@material-ui/core";
 
 //Componentes
 
@@ -55,17 +55,19 @@ export default function Cliente() {
 
 	//Envia dados para o banco
 	const sendToDB = async () => {
-		const response = await fetch("/api/clientes", {
+		const response = await fetch("/api/clients/create", {
 			method: "POST",
 			body: JSON.stringify(client),
 		});
 		if (response.status === 200) {
-			alert("Cliente cadastrado com sucesso");
+			alert("Cadastro Realizado!");
+		} else {
+			alert("Verifique os dados e tente novamente");
 		}
 	};
 
 	return (
-		<Container classes={{ root: clientStyles.container }}>
+		<div classes={{ root: clientStyles.container }}>
 			<h1>Bem vindo à pagina de Clientes</h1>
 			<div className={clientStyles.divForm}>
 				<div>
@@ -135,6 +137,6 @@ export default function Cliente() {
 					Enviar
 				</Button>
 			</div>
-		</Container>
+		</div>
 	);
 }
