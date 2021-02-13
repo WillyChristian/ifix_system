@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { makeStyles, Container } from "@material-ui/core";
 
 //Componentes
-import Menu from "./components/Menu";
+import Menu from "./components/menu";
 
 //Estilos
 const style = makeStyles({
@@ -15,18 +15,10 @@ const style = makeStyles({
 	},
 });
 
-const Home = ({ user }) => {
-	const [page, setPage] = useState();
-
-	const contStyle = style();
-
-	useEffect(() => {
-		console.log(page);
-	}, []);
+const Home = () => {
 	return (
 		<>
-			<Menu loggedUser={user} setpage={setPage} />
-			{page}
+			<Menu></Menu>
 		</>
 	);
 };
