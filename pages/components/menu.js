@@ -31,7 +31,10 @@ const Menu = () => {
 		<div className={menuStyles.menu}>
 			<ul className={menuStyles.ul}>
 				<Link href='/service/_list'>
-					<a className={menuStyles.a}>Ordens de Serviço</a>
+					<a className={menuStyles.a}>Consultar Ordens de Serviço</a>
+				</Link>
+				<Link href='/service/_new'>
+					<a className={menuStyles.a}>Abrir Ordens de Serviço</a>
 				</Link>
 				<Link href='/client/_new'>
 					<a className={menuStyles.a}>Cadastrar Clientes</a>

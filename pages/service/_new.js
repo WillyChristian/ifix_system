@@ -43,31 +43,43 @@ const _new = () => {
 							<div>
 								<InputLabel id="produtos">Peças</InputLabel>
 								<Select labelId="_pecas">
-									{ 
+									{/* { 
 										pecas.map( elemento =>{
 											<MenuItem value={key} >{elemento.peca_name}</MenuItem>
 										} )
-									}
+									} */}
+									<MenuItem value={1} >Peça 1</MenuItem>
+									<MenuItem value={2} >Peça 2</MenuItem>
+									<MenuItem value={3} >Peça 3</MenuItem>
 								</Select>				
 								<InputLabel id="_tec">Técnico</InputLabel>
 								<Select labelId="_tec">
-									{ 
+									{/* 
 										tecnico.map( elemento =>{
 											<MenuItem value={key} >{elemento.tecnico_name}</MenuItem>
 										} )
-									}
+									*/}
+
+									<MenuItem value={1} >Tecnico 1</MenuItem>
+									<MenuItem value={1} >Tecnico 2</MenuItem>
+									<MenuItem value={1} >Tecnico 3</MenuItem>
+									<MenuItem value={1} >Tecnico 4</MenuItem>
 								</Select>				
 								<InputLabel label="Atendente" id="_seller">Atendente</InputLabel>
 								<Select labelId="_tec">
-									{ 
+									{ /*
 										tecnico.map( elemento =>{
 											<MenuItem value={key} >{elemento.tecnico_name}</MenuItem>
 										} )
-									}
+									*/}
+									<MenuItem value={1} >Atendente 1</MenuItem>
+									<MenuItem value={2} >Atendente 2</MenuItem>
+									<MenuItem value={3} >Atendente 3</MenuItem>
+									<MenuItem value={4} >Atendente 4</MenuItem>
 								</Select>
 							</div>
 							<div>
-								<TextField multiline label="Resoluão"/>
+								<TextField multiline label="Resolução"/>
 							</div>
 						</div>
 					</div>

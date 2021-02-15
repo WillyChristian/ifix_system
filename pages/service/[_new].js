@@ -1,7 +1,7 @@
 import React from "react";
 import useSWR from "swr";
 import { useRouter } from "next/router";
-import { makeStyles, TextField } from "@material-ui/core";
+import { makeStyles, TextField, Select, InputLabel, MenuItem } from "@material-ui/core";
 
 //components
 import Menu from "../components/menu";
@@ -24,60 +24,24 @@ const _new = () => {
 	return (
 		<>
 			<Menu />
-			<form className={classes.root} noValidate autoComplete='on'>
 				<div>
-					<TextField
-						id='outlined-required'
-						label='ID'
-						defaultValue='Teste'
-						variant='outlined'
-						InputProps={{
-							readOnly: true,
-						}}
-					/>
-					<TextField
-						id='outlined-disabled'
-						label='Nome'
-						variant='outlined'
-					/>
-					<TextField
-						id='outlined-password-input'
-						label='CPF'
-						autoComplete='current-password'
-						label='Read Only'
-						variant='outlined'
-					/>
-					<TextField
-						id='outlined-read-only-input'
-						label='Read Only'
-						InputProps={{
-							readOnly: true,
-						}}
-						variant='outlined'
-					/>
-					<TextField
-						id='outlined-number'
-						label='Number'
-						type='number'
-						InputLabelProps={{
-							shrink: true,
-						}}
-						variant='outlined'
-					/>
-					<TextField
-						id='outlined-search'
-						label='Técnico'
-						type='search'
-						variant='outlined'
-					/>
-					<TextField
-						id='outlined-helperText'
-						label='Helper text'
-						helperText='Some important text'
-						variant='outlined'
-					/>
+					<div className="container-1">
+						<div className="problem">
+							<TextFiel />
+						</div>
+						<div className="problem-textArea">
+
+						</div>
+					</div>
+					<div className="container-2">
+						<div className="resolution">
+
+						</div>
+						<div className="resolution-textArea">
+							
+						</div>
+					</div>
 				</div>
-			</form>
 		</>
 	);
 };
