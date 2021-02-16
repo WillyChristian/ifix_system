@@ -5,22 +5,12 @@ The aim of this project is to create something close to an ERP to manage work or
 
 To run the development server:
 
-npm run dev
+npm run dev **or** yarn dev
 
-# or
+#### Prerequisites
 
-yarn dev
-
-# Prerequisites
-
-This projeject use MongoDB Atlas as a datrabase. So, you need to edit .env.local.example file and add your credentials.
-At this point, the software needs some collections on your MongoDB to run fine. Are they:
-
-# clientes
-
-and
-
-# funcionario
+This projeject use MongoDB Atlas as a datrabase. So, you need to edit **.env.local.example** file and add your credentials.
+At this point, the software needs some collections on your MongoDB to run fine. Are they: **clientes** and **funcionario**
 
 You have to pass at less an "nome" and "pass" attributes to your "funcionario" collection
 
