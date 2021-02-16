@@ -1,22 +1,29 @@
 {
-    "name":"",
-    "belonging_store": "",
-    "category": "",
-    "service_orders": [{
-        "id":"",
-        "service_order": "",
-        "service_price":"",
-        "discount" : "",
-        "pay_method":"",
-        "times": "",
-        "final_price":""
-    }],
-    "sales": [{
-        "sale_id":"",
-        "sale_price":"",
-        "discount" : "",
-        "pay_method":"",
-        "times": "",
-        "final_price":""
-    }]
+	"name": "",
+	"pass": "",
+	"belonging_store": "",
+	"category": "",
+	"service_orders": [
+		{
+			"id": "",
+			"item_name": "",
+			"item_category": "",
+			"service_order": "",
+			"service_price": "",
+			"discount": "",
+			"pay_method": "",
+			"times": "",
+			"final_price": ""
+		}
+	],
+	"sales": [
+		{
+			"sale_id": "",
+			"sale_price": "",
+			"discount": "",
+			"pay_method": "",
+			"times": "",
+			"final_price": ""
+		}
+	]
 }

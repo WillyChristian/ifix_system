@@ -57,7 +57,7 @@ const Login = ({ funcionarios }) => {
 		const list_func = JSON.parse(funcionarios);
 		let userLogged;
 		list_func.map((e) => {
-			if (e.nome === user.username) {
+			if (e.nome === user.name) {
 				if (e.pass === user.pass) {
 					userLogged = e;
 				}
@@ -125,7 +125,7 @@ const Login = ({ funcionarios }) => {
 export async function getServerSideProps(context) {
 	const { db } = await connectToDatabase();
 
-	const temp_func = await db.collection("funcionarios").find({}).toArray();
+	const temp_func = await db.collection("employees").find({}).toArray();
 	const funcionarios = JSON.stringify(temp_func);
 	return {
 		props: { funcionarios },
