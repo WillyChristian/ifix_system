@@ -21,7 +21,7 @@ const readEmployee = async (req, res) => {
 			res.status(200).send(employee);
 		}
 	} else {
-		res.send("nó é a mamãe");
+		res.send("Erro. Verificar o parâmetro de busca.");
 	}
 };
 
