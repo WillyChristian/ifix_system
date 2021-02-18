@@ -1,0 +1,38 @@
+
+{
+	"_id": " ",
+	"reported_issue":"",
+	"repair": "",
+	"client": [{
+		"id":"",
+		"name": "",
+		"phone":""
+	}],
+	"attendant":[{
+		"id": "",
+		"name":"",
+		"store": ""
+	}],	
+	"tecnician":[{
+		"id":"",
+		"name": "",
+		"store": ""
+	}],	
+	"product":[{
+		"product_id":"",
+		"product_name": "",
+		"quantity": "",
+		"unit_price":""
+	}],
+	"status": "",
+	"comments": [{
+		"attendant_id":"",
+		"attendant_name":"",
+		"content": "",
+		"date": "function Date()"
+	}],
+	"service_price":"",
+	"discount" : "",
+	"pay_method":"",
+	"times": ""	
+}

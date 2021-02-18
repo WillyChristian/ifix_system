@@ -3,7 +3,7 @@ import { connectToDatabase } from "../../../util/mongodb";
 /* 
     Por hora busca apenas os itens listados como sendo do tipo 'Manutenção'
 
-    em breve será tratada para receber parâmetros de busca
+    em breve será tratada para receber parâmetros diferentes de busca
 
 */
 const readProducts = async (req, res) => {

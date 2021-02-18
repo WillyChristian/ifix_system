@@ -14,6 +14,7 @@ import {
 import Menu from "../components/menu";
 import Err from "../components/error";
 import axios from "axios";
+import { Parts } from "../components/parts";
 
 const useStyles = makeStyles((theme) => ({
 	//layout da págna
@@ -87,17 +88,33 @@ const useStyles = makeStyles((theme) => ({
 	//layout comentários
 }));
 
-const _new = ({ attendant, tecnicians, parts }) => {
-	const [client, setClient] = useState({
-		full_name: "",
-		id: "",
-		phone: "",
-	});
+const submitOs = () => {};
+
+const _new = ({ attendant, tecnicians }) => {
+	const [client, setClient] = useState({});
 	const [att, setAtt] = useState(JSON.parse(attendant));
-	const [part, setPart] = useState(JSON.parse(parts));
 	const [tec, setTec] = useState(JSON.parse(tecnicians));
 	// const [comments, setComments] = useState([]);
+	const [os, setOs] = useState({});
 	const classes = useStyles();
+
+	const handleChange = (event) => {
+		const value = event.target.value;
+		const key = event.target.id;
+		setOs({
+			...os,
+			[key]: value,
+		});
+	};
+
+	const handleChangeSelect = (event) => {
+		const value = event.target.value;
+		const key = event.target.name;
+		setOs({
+			...os,
+			[key]: value,
+		});
+	};
 
 	/*
 
@@ -126,41 +143,57 @@ const _new = ({ attendant, tecnicians, parts }) => {
 	/* Pesquisa cliente por CPF */
 	const searchById = async () => {
 		const _id = document.querySelector("#cpf").value;
-		axios.get(`../api/clients/${_id}`).then((response) => {
-			const client = response.data[0];
-			setClient({
-				full_name: client.full_name,
-				phone: client.phone,
-				id: client._id,
-			});
-		});
+		axios
+			.get(`../api/clients/${_id}`)
+			.then((response) => {
+				const data = response.data[0];
+				setClient({ ...data });
+			})
+			.catch((err) => console.log(err));
 	};
 
 	return (
 		<>
+			{console.log(os)}
 			<Menu />
 			<div className={classes.main}>
 				<div className={classes.cli_container}>
 					<div className={classes.sub_container}>
 						<div className={classes.search_container}>
-							<TextField label='CPF' id='cpf' />
+							<TextField
+								placeholder='CPF'
+								id='cpf'
+								onChange={handleChange}
+							/>
 							<Button onClick={() => searchById()}>Buscar</Button>
 						</div>
-						<TextField label='ID' id='_id' value={client.id} />
 						<TextField
-							label='Nome'
+							placeholder='ID'
+							id='_id'
+							value={client._id}
+							onChange={handleChange}
+						/>
+						<TextField
+							placeholder='Nome'
 							id='full_name'
 							value={client.full_name}
+							onChange={handleChange}
 						/>
-						<TextField label='Celular' id='phone' value={client.phone} />
+						<TextField
+							placeholder='Celular'
+							id='phone'
+							value={client.phone}
+							onChange={handleChange}
+						/>
 					</div>
 					<TextField
 						multiline
-						label='Problema Reportado'
+						placeholder='Problema Reportado'
 						id='device_issue'
 						fullWidth
 						rows={8}
 						variant='outlined'
+						onChange={handleChange}
 					/>
 				</div>
 
@@ -170,7 +203,11 @@ const _new = ({ attendant, tecnicians, parts }) => {
 							<InputLabel label='Técnico' id='_tec'>
 								Técnico
 							</InputLabel>
-							<Select labelId='_tec'>
+							<Select
+								labelId='_tec'
+								name='tecnician'
+								onChange={handleChangeSelect}
+							>
 								{tec.map((elemento) => {
 									return (
 										<MenuItem value={elemento._id}>
@@ -184,7 +221,11 @@ const _new = ({ attendant, tecnicians, parts }) => {
 							<InputLabel label='Atendente' id='_seller'>
 								Atendente
 							</InputLabel>
-							<Select labelId='_tec'>
+							<Select
+								labelId='_seller'
+								name='attendant'
+								onChange={handleChangeSelect}
+							>
 								{att.map((element) => {
 									return (
 										<MenuItem value={element._id}>
@@ -198,33 +239,51 @@ const _new = ({ attendant, tecnicians, parts }) => {
 					<div className={classes.bloco_2}>
 						<div className={classes.sub_container}>
 							<FormControl>
-								<InputLabel id='produto_1'></InputLabel>
-								<Select labelId='produto_1'>
-									{part.map((elemento) => {
-										<MenuItem value={key}>
-											{elemento.peca_name}
-										</MenuItem>;
+								<InputLabel id='part'>Peça</InputLabel>
+								<Select
+									labelId='part'
+									name='part'
+									onChange={handleChangeSelect}
+								>
+									{Parts.Part_Type.map((type) => {
+										return <MenuItem value={type}>{type}</MenuItem>;
 									})}
 								</Select>
 							</FormControl>
 							<FormControl>
-								<InputLabel id='produto_2'>Peças</InputLabel>
-								<Select labelId='produto_2'>
-									{/* {pecas.map((elemento) => {
-										<MenuItem value={key}>
-											{elemento.peca_name}
-										</MenuItem>;
-									})} */}
+								<InputLabel id='model'>Modelo</InputLabel>
+								<Select
+									labelId='model'
+									name='model'
+									onChange={handleChangeSelect}
+								>
+									{Parts.Models.map((model) => {
+										return <MenuItem value={model}>{model}</MenuItem>;
+									})}
 								</Select>
 							</FormControl>
 							<FormControl>
-								<InputLabel id='produto_3'>Peças</InputLabel>
-								<Select labelId='produto_3'>
-									{/* {pecas.map((elemento) => {
-										<MenuItem value={key}>
-											{elemento.peca_name}
-										</MenuItem>;
-									})} */}
+								<InputLabel id='color'>Cor</InputLabel>
+								<Select
+									labelId='color'
+									name='color'
+									onChange={handleChangeSelect}
+								>
+									{Parts.Colors.map((color) => {
+										return <MenuItem value={color}>{color}</MenuItem>;
+									})}
+								</Select>
+							</FormControl>
+							<FormControl>
+								<InputLabel id='quality'>Tipo</InputLabel>
+								<Select
+									labelId='quality'
+									name='quality'
+									onChange={handleChangeSelect}
+								>
+									{Parts.Quality.map((qlty) => {
+										return <MenuItem value={qlty}>{qlty}</MenuItem>;
+									})}
 								</Select>
 							</FormControl>
 						</div>
@@ -234,12 +293,23 @@ const _new = ({ attendant, tecnicians, parts }) => {
 							label='Resolução do Problema'
 							id='resolution'
 							fullWidth
-							rows={6}
+							rows={8}
 							variant='outlined'
 						/>
 					</div>
 				</div>
 
+				<div className={classes.cli_container}>
+					<div className={classes.divForm}>
+						<Button
+							variant='outlined'
+							color='primary'
+							onClick={() => alert("Formulário enviado")}
+						>
+							Enviar
+						</Button>
+					</div>
+				</div>
 				{/*
 				<div className={classes.maint_container}>
 					<TextField id='comm' />
@@ -268,17 +338,11 @@ export async function getServerSideProps(context) {
 		.find({ category: "Atendente" })
 		.toArray();
 
-	const temp_part = await db
-		.collection("produtos")
-		.find({ type: "Manutenção" })
-		.toArray();
-
 	const tecnicians = JSON.stringify(temp_tec);
 	const attendant = JSON.stringify(temp_att);
-	const parts = JSON.stringify(temp_part);
 
 	return {
-		props: { tecnicians, attendant, parts },
+		props: { tecnicians, attendant },
 	};
 }
 export default _new;

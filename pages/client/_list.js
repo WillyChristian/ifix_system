@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import Menu from "../components/menu";
 import axios from "axios";
 import Error from "../components/error";
-import AbrirOs from "../service/[_new]";
 import { Button, TextField, makeStyles } from "@material-ui/core";
 
 // Estilos
