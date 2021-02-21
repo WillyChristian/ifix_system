@@ -1,0 +1,52 @@
+
+{
+	"_id": " ",
+	"reported_issue":"",
+	"repair": "",
+	"client": [{
+		"id":"",
+		"name": "",
+		"phone":""
+	}],
+	"attendant":[{
+		"id": "",
+		"name":"",
+		"store": ""
+	}],	
+	"tecnician":[{
+		"id":"",
+		"name": "",
+		"store": ""
+	}],	
+	"product":[{
+		"product_id":"",
+		"product_name": "",
+		"quantity": "",
+		"unit_price":""
+	}],
+	"status": "",
+	"comments": [{
+		"attendant_id":"",
+		"attendant_name":"",
+		"content": "",
+		"date": "function Date()"
+	}],
+	"service_price":"",
+	"discount" : "",
+	"pay_method":"",
+	"times": ""	
+}
+
+
+
+
+
+
+
+
+
+
+
+{
+	{"_id":{"$oid":"60307b3789c272520ba887ca"},"client":{"client_id":"sd4a56s4da5s4d654f5a4fa","name":"adkajskdlj","phone":"1321321321"},"attendant":{"att_id":"1as2d1a32s1d4re654r","name":"djddjfksdjfksd","store":"dasdasd"},"tecnician":{"tec_id":"s1da32s1d32as1","name":"dasdaakgçlskf","store":"alhfdashdjkl"},"device":{"brand":"apple","model":"iphone 7","color":"black"},"in":{"date":"21111978","description":"fajskdhakjshdkjashjdhjaskhd","type_in":"garantia"},"out":{"date":"22111987","status":"aguardando retirada","description":"djfksdjklsjdfklsdjfsdjfçlksfjkj"},"removal":{"date":"23101988","price":"999","discount":"99","times":"3","taxes":"12.1","final_price":"899"}}
+}

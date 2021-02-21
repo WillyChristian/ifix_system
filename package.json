@@ -9,11 +9,13 @@
 	"dependencies": {
 		"@material-ui/core": "^4.11.3",
 		"axios": "^0.21.1",
+		"formik": "^2.2.6",
 		"mongodb": "^3.5.9",
 		"next": "latest",
 		"react": "latest",
 		"react-dom": "^16.13.1",
-		"swr": "^0.4.2"
+		"swr": "^0.4.2",
+		"yup": "^0.32.9"
 	},
 	"license": "MIT",
 	"devDependencies": {
