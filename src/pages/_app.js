@@ -1,8 +1,12 @@
 import "../../styles/globals.css";
+import SetProvider from "./components/empContext/provider";
+
 function MyApp({ Component, pageProps }) {
 	return (
 		<>
-			<Component {...pageProps} />
+			<SetProvider>
+				<Component {...pageProps} />;
+			</SetProvider>
 		</>
 	);
 }
