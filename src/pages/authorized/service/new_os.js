@@ -84,12 +84,4 @@ const NewOs = () => {
 	);
 };
 
-// function getServerSideProps(context){
-//     return {
-//         prosps:{
-
-//         }
-//     }
-// }
-
 export default NewOs;

@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { connectToDatabase } from "../../util/mongodb";
+import React from "react";
 import {
 	makeStyles,
 	TextField,
@@ -11,10 +10,8 @@ import {
 } from "@material-ui/core";
 
 //components
-import Menu from "../components/menu";
-import Err from "../components/error";
+import Menu from "../../components/menu";
 import axios from "axios";
-import { Parts } from "../components/parts";
 
 const useStyles = makeStyles((theme) => ({
 	//layout da págna
@@ -84,61 +81,10 @@ const useStyles = makeStyles((theme) => ({
 		width: "50%",
 		margin: "0 1rem",
 	},
-
-	//layout comentários
 }));
 
-const submitOs = () => {};
-
-const _new = ({ attendant, tecnicians }) => {
-	const [client, setClient] = useState({});
-	const [att, setAtt] = useState(JSON.parse(attendant));
-	const [tec, setTec] = useState(JSON.parse(tecnicians));
-	// const [comments, setComments] = useState([]);
-	const [os, setOs] = useState({});
+const _new = () => {
 	const classes = useStyles();
-
-	const handleChange = (event) => {
-		const value = event.target.value;
-		const key = event.target.id;
-		setOs({
-			...os,
-			[key]: value,
-		});
-	};
-
-	const handleChangeSelect = (event) => {
-		const value = event.target.value;
-		const key = event.target.name;
-		setOs({
-			...os,
-			[key]: value,
-		});
-	};
-
-	/*
-
-		Esta função deverá ser implementada em uma próxima etapa
-
-	function addComment() {
-		const comm = document.querySelector("#comm").value;
-		const user = localStorage.getItem();
-		const date = new Date().toString();
-		axios
-			.post(`api/os/comm`, {
-				body: {
-					comment: comm,
-					user: user,
-					date,
-				},
-			})
-			.then((e) => {
-				setComments(e.data);
-			});
-	}
-
-	useEffect(() => {}, [comments]);
-	*/
 
 	/* Pesquisa cliente por CPF */
 	const searchById = async () => {
@@ -154,37 +100,17 @@ const _new = ({ attendant, tecnicians }) => {
 
 	return (
 		<>
-			{console.log(os)}
 			<Menu />
 			<div className={classes.main}>
 				<div className={classes.cli_container}>
 					<div className={classes.sub_container}>
 						<div className={classes.search_container}>
-							<TextField
-								placeholder='CPF'
-								id='cpf'
-								onChange={handleChange}
-							/>
+							<TextField placeholder='CPF' id='cpf' />
 							<Button onClick={() => searchById()}>Buscar</Button>
 						</div>
-						<TextField
-							placeholder='ID'
-							id='_id'
-							value={client._id}
-							onChange={handleChange}
-						/>
-						<TextField
-							placeholder='Nome'
-							id='full_name'
-							value={client.full_name}
-							onChange={handleChange}
-						/>
-						<TextField
-							placeholder='Celular'
-							id='phone'
-							value={client.phone}
-							onChange={handleChange}
-						/>
+						{/* <TextField placeholder='ID' id='_id' value={client._id} /> */}
+						<TextField placeholder='Nome' id='full_name' />
+						<TextField placeholder='Celular' id='phone' />
 					</div>
 					<TextField
 						multiline
@@ -193,7 +119,6 @@ const _new = ({ attendant, tecnicians }) => {
 						fullWidth
 						rows={8}
 						variant='outlined'
-						onChange={handleChange}
 					/>
 				</div>
 
@@ -203,36 +128,28 @@ const _new = ({ attendant, tecnicians }) => {
 							<InputLabel label='Técnico' id='_tec'>
 								Técnico
 							</InputLabel>
-							<Select
-								labelId='_tec'
-								name='tecnician'
-								onChange={handleChangeSelect}
-							>
-								{tec.map((elemento) => {
+							<Select labelId='_tec' name='tecnician'>
+								{/* {tec.map((elemento) => {
 									return (
 										<MenuItem value={elemento._id}>
 											{elemento.name}
 										</MenuItem>
 									);
-								})}
+								})} */}
 							</Select>
 						</FormControl>
 						<FormControl className={classes.formControl}>
 							<InputLabel label='Atendente' id='_seller'>
 								Atendente
 							</InputLabel>
-							<Select
-								labelId='_seller'
-								name='attendant'
-								onChange={handleChangeSelect}
-							>
-								{att.map((element) => {
+							<Select labelId='_seller' name='attendant'>
+								{/* {att.map((element) => {
 									return (
 										<MenuItem value={element._id}>
 											{element.name}
 										</MenuItem>
 									);
-								})}
+								})} */}
 							</Select>
 						</FormControl>
 					</div>
@@ -240,51 +157,35 @@ const _new = ({ attendant, tecnicians }) => {
 						<div className={classes.sub_container}>
 							<FormControl>
 								<InputLabel id='part'>Peça</InputLabel>
-								<Select
-									labelId='part'
-									name='part'
-									onChange={handleChangeSelect}
-								>
-									{Parts.Part_Type.map((type) => {
+								<Select labelId='part' name='part'>
+									{/* {Parts.Part_Type.map((type) => {
 										return <MenuItem value={type}>{type}</MenuItem>;
-									})}
+									})} */}
 								</Select>
 							</FormControl>
 							<FormControl>
 								<InputLabel id='model'>Modelo</InputLabel>
-								<Select
-									labelId='model'
-									name='model'
-									onChange={handleChangeSelect}
-								>
-									{Parts.Models.map((model) => {
+								<Select labelId='model' name='model'>
+									{/* {Parts.Models.map((model) => {
 										return <MenuItem value={model}>{model}</MenuItem>;
-									})}
+									})} */}
 								</Select>
 							</FormControl>
 							<FormControl>
 								<InputLabel id='color'>Cor</InputLabel>
-								<Select
-									labelId='color'
-									name='color'
-									onChange={handleChangeSelect}
-								>
-									{Parts.Colors.map((color) => {
+								<Select labelId='color' name='color'>
+									{/* {Parts.Colors.map((color) => {
 										return <MenuItem value={color}>{color}</MenuItem>;
-									})}
+									})} */}
 								</Select>
 							</FormControl>
 							<FormControl>
 								<InputLabel id='quality'>Tipo</InputLabel>
-								<Select
-									labelId='quality'
-									name='quality'
-									onChange={handleChangeSelect}
-								>
+								{/* <Select labelId='quality' name='quality'>
 									{Parts.Quality.map((qlty) => {
 										return <MenuItem value={qlty}>{qlty}</MenuItem>;
 									})}
-								</Select>
+								</Select> */}
 							</FormControl>
 						</div>
 						<TextField
@@ -310,39 +211,9 @@ const _new = ({ attendant, tecnicians }) => {
 						</Button>
 					</div>
 				</div>
-				{/*
-				<div className={classes.maint_container}>
-					<TextField id='comm' />
-					<div className={classes.divForm}>
-						 	Deverá ser inserido nas próximas atualizações
-							 <span>{att.full_name}</span> 
-						 
-						<span>{Date().toString()}</span>
-					</div>
-				</div>
-				*/}
 			</div>
 		</>
 	);
 };
 
-export async function getServerSideProps(context) {
-	const { db } = await connectToDatabase();
-
-	const temp_tec = await db
-		.collection("employees")
-		.find({ category: "Técnico" })
-		.toArray();
-	const temp_att = await db
-		.collection("employees")
-		.find({ category: "Atendente" })
-		.toArray();
-
-	const tecnicians = JSON.stringify(temp_tec);
-	const attendant = JSON.stringify(temp_att);
-
-	return {
-		props: { tecnicians, attendant },
-	};
-}
 export default _new;

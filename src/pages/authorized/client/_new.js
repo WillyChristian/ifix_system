@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Menu from "../components/menu";
+import Menu from "../../components/menu";
 import { Button, makeStyles, TextField } from "@material-ui/core";
 
 const style = makeStyles((theme) => ({

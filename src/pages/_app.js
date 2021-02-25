@@ -1,12 +1,11 @@
 import "../../styles/globals.css";
-import SetProvider from "./components/empContext/provider";
-
+import { Provider } from "next-auth/client";
 function MyApp({ Component, pageProps }) {
 	return (
 		<>
-			<SetProvider>
+			<Provider session={pageProps.session}>
 				<Component {...pageProps} />;
-			</SetProvider>
+			</Provider>
 		</>
 	);
 }
