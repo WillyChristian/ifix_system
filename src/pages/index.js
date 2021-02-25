@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import {
 	Container,
 	Button,
@@ -29,12 +29,20 @@ const Styles = makeStyles({
 });
 
 const Login = () => {
+	const [user, setUser] = useState({
+		name: "",
+		pass: "",
+	});
 	const employee = useContext(employeeContext);
 	const style = Styles();
 
 	const authLogin = () => {
-		const tec = employee.emp[0];
-		console.log(tec.name);
+		employee.setLogged(user);
+	};
+
+	const handleUserChange = (event) => {
+		const { id, value } = event.target;
+		const obj = { id: value };
 	};
 
 	return (
@@ -53,14 +61,16 @@ const Login = () => {
 								<TextField
 									label='Username'
 									variant='filled'
-									name='username'
+									id='name'
+									onChange={handleUserChange}
 								/>
 							</Grid>
 							<Grid item>
 								<TextField
 									label='Password'
 									variant='filled'
-									name='pass'
+									id='pass'
+									onChange={handleUserChange}
 								/>
 							</Grid>
 							<Grid item>
@@ -71,8 +81,8 @@ const Login = () => {
 						</Grid>
 					</fieldset>
 				</form>
-				<Typography color='error'>Oi</Typography>
 			</Container>
+			<Typography color='error'>{employee.logged}</Typography>
 		</>
 	);
 };

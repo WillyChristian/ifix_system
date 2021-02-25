@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import { makeStyles, Container } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 
 //Componentes
 import Menu from "./components/menu";
