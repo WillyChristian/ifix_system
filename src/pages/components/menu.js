@@ -35,31 +35,37 @@ const Menu = () => {
 				<Link href='/'>
 					<a className={menuStyles.a}> HOME </a>
 				</Link>
-				<Link href='/authorized/service/_new'>
+				<Link href='/authorize/service/_new'>
 					<a className={menuStyles.a}> Abrir OS </a>
 				</Link>
-				<Link href='/authorized/client/_list'>
+				<Link href='/authorize/client/_list'>
 					<a className={menuStyles.a}> Consultar Cliente </a>
 				</Link>
-				<Link href='/authorized/client/_new'>
+				<Link href='/authorize/client/_new'>
 					<a className={menuStyles.a}> Cadastrar Cliente </a>
+				</Link>
+				<Link href='/authorize/service/_list'>
+					<a className={menuStyles.a}> Consulta OS</a>
 				</Link>
 			</ul>
 			<div className={menuStyles.login}>
 				{session && (
-					<Button
-						variant='outlined'
-						color='danger'
-						onClick={() => signOut()}
-					>
-						Sair
-					</Button>
+					<>
+						<span>{session.user.name}</span>
+						<Button
+							variant='outlined'
+							color='danger'
+							onClick={() => signOut()}
+						>
+							Sair
+						</Button>
+					</>
 				)}
 				{!session && (
 					<Button
 						variant='outlined'
 						color='primary'
-						onClick={() => signIn()}
+						onClick={() => signIn("auth0",  {callbackUrl: '/authorize/home'})}
 					>
 						Logar
 					</Button>
