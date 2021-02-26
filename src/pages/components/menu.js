@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { makeStyles, Button } from "@material-ui/core";
+import { makeStyles, Button, Typography } from "@material-ui/core";
 import { signIn, signOut, useSession } from "next-auth/client";
 
 //Estilos
@@ -23,6 +23,11 @@ const style = makeStyles({
 	},
 	login: {
 		float: "right",
+		display:"flex",
+		width: "200px",
+		justifyContent: 'space-around',
+		alignItems: "center",
+		
 	},
 });
 const Menu = () => {
@@ -36,22 +41,28 @@ const Menu = () => {
 					<a className={menuStyles.a}> HOME </a>
 				</Link>
 				<Link href='/authorize/service/_new'>
-					<a className={menuStyles.a}> Abrir OS </a>
+					<a className={menuStyles.a}> Cadastrar OS </a>
 				</Link>
-				<Link href='/authorize/client/_list'>
-					<a className={menuStyles.a}> Consultar Cliente </a>
+				<Link href='/authorize/service/_list'>
+					<a className={menuStyles.a}> Consulta OS</a>
 				</Link>
 				<Link href='/authorize/client/_new'>
 					<a className={menuStyles.a}> Cadastrar Cliente </a>
 				</Link>
-				<Link href='/authorize/service/_list'>
-					<a className={menuStyles.a}> Consulta OS</a>
+				<Link href='/authorize/client/_list'>
+					<a className={menuStyles.a}> Consultar Cliente </a>
 				</Link>
 			</ul>
 			<div className={menuStyles.login}>
 				{session && (
 					<>
-						<span>{session.user.name}</span>
+					
+						<span>
+							<Typography variant='body1'>
+								{session.user.name}
+							</Typography>
+						</span>
+				
 						<Button
 							variant='outlined'
 							color='danger'
@@ -63,9 +74,12 @@ const Menu = () => {
 				)}
 				{!session && (
 					<Button
+						size='small'
 						variant='outlined'
 						color='primary'
-						onClick={() => signIn("auth0",  {callbackUrl: '/authorize/home'})}
+						onClick={() =>
+							signIn("auth0", { callbackUrl: "/authorize/home" })
+						}
 					>
 						Logar
 					</Button>

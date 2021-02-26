@@ -1,4 +1,4 @@
-import { connectToDatabase } from "../../../util/mongodb";
+import { connectToDatabase } from "../../../../util/mongodb";
 
 const readEmployee = async (req, res) => {
 	if (req.method === "GET") {

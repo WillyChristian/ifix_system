@@ -1,4 +1,4 @@
-import { connectToDatabase } from "../../../util/mongodb";
+import { connectToDatabase } from "../../../../util/mongodb";
 
 /* 
     Por hora busca apenas os itens listados como sendo do tipo 'Manutenção'

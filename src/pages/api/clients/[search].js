@@ -1,4 +1,4 @@
-import { connectToDatabase } from "../../../util/mongodb";
+import { connectToDatabase } from "../../../../util/mongodb";
 import { ObjectID } from "mongodb";
 
 const Consulta = async (req, res) => {

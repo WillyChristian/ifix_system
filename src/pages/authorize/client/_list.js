@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
-import { Button, TextField, makeStyles } from "@material-ui/core";
+import { Button, TextField, makeStyles, Typography } from "@material-ui/core";
 import { useSession } from "next-auth/client";
 
 //Component
@@ -25,6 +25,15 @@ const style = makeStyles({
 		width: "500px auto",
 		margin: "2rem",
 	},
+	trow: {
+		padding: "5px",
+		borderTop: "1px solid",
+		borderBottom: "1px solid",
+	},
+	tcolumn: {
+		padding: "5px",
+		borderTop: "1px solid",
+	},
 });
 
 const Listar = () => {
@@ -35,9 +44,12 @@ const Listar = () => {
 		const router = useRouter();
 		const [client, setClient] = useState([]);
 		const [error, setError] = useState("");
+		const listarStyle = style();
+
+		// pesquisa cliente
 		const getClientLIst = async () => {
 			const cpf = document.getElementById("cpf").value;
-			const url = `../api/clients/${cpf}`;
+			const url = `../../api/clients/${cpf}`;
 			console.log(url);
 			await axios
 				.get(url)
@@ -49,14 +61,6 @@ const Listar = () => {
 				});
 		};
 
-		const listarStyle = style();
-
-		const abrirOS = (id) => {
-			router.push({
-				pathname: "../service/[id]",
-				query: { id },
-			});
-		};
 		if (error) {
 			return <Error />;
 		} else {
@@ -72,25 +76,49 @@ const Listar = () => {
 							<Button onClick={getClientLIst}>Listar</Button>
 						</div>
 						<table>
-							<tr>
-								<th>ID</th>
-								<th>NOME</th>
-								<th>CPF</th>
-								<th></th>
-							</tr>
-							{client?.map((event) => {
+							<thead>
+								<tr className={listarStyle.trow}>
+									<th className={listarStyle.tcolumn}>
+										<Typography>#</Typography>
+									</th>
+									<th className={listarStyle.tcolumn}>
+										<Typography>ID</Typography>
+									</th>
+									<th className={listarStyle.tcolumn}>
+										<Typography>Nome</Typography>
+									</th>
+									<th className={listarStyle.tcolumn}>
+										<Typography>CPF</Typography>
+									</th>
+									<th className={listarStyle.tcolumn}></th>
+								</tr>
+							</thead>
+							{client?.map((event, id) => {
 								return (
 									<>
-										<tr>
-											<td>{event._id}</td>
-											<td>{event.full_name}</td>
-											<td>{event.cpf}</td>
-											<td>
-												<Button onClick={() => abrirOS(event._id)}>
-													Abrir OS
-												</Button>
-											</td>
-										</tr>
+										<tbody>
+											<tr className={listarStyle.trow}>
+												<td className={listarStyle.tcolumn}>
+													<Typography>{id}</Typography>
+												</td>
+												<td className={listarStyle.tcolumn}>
+													<Typography>{event._id}</Typography>
+												</td>
+												<td className={listarStyle.tcolumn}>
+													<Typography>{event.full_name}</Typography>
+												</td>
+												<td className={listarStyle.tcolumn}>
+													<Typography>{event.cpf}</Typography>
+												</td>
+												<td className={listarStyle.tcolumn}>
+													<Button
+														onClick={() => abrirOS(event._id)}
+													>
+														Abrir OS
+													</Button>
+												</td>
+											</tr>
+										</tbody>
 									</>
 								);
 							})}
