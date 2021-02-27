@@ -78,17 +78,17 @@ const Cliente = () => {
 			},
 			onSubmit: (values) => {
 				alert(JSON.stringify(values, null, 2));
-				/*
-		   const response = await fetch("/api/clients/create", {
-        method: "POST",
-        body: JSON.stringify(client),
-      });
-      if (response.status === 200) {
-        alert("Cadastro Realizado!");
-      } else {
-        alert("Verifique os dados e tente novamente");
-      }
-		*/
+				// SERA IPLEMENTADO APÓS CONCLUIR OS PROBLEMAS DO FORMULÁRIO
+				// const response = await fetch("/api/clients/create", {
+				// method: "POST",
+				// body: JSON.stringify(values)
+				// });
+				// if (response.status === 200) {
+				// 	alert("Cadastro Realizado!");
+				// } else {
+				// 	alert("Verifique os dados e tente novamente");
+				// }
+
 			},
 			validationSchema: Yup.object({
 				full_name: Yup.string()
@@ -253,36 +253,3 @@ const Cliente = () => {
 	}
 };
 export default Cliente;
-
-/*
-api cep: 
-
-
-form:
-        <div classes={{ root: clientStyles.container }}>
-          <div className={clientStyles.divForm}>
-            <div>
-
-
-
-            </div>
-            <div>
-              
-
-
-  
-            </div>
-          </div>
-          <div>
-            <Button
-              type="submit"
-              variant="outlined"
-              color="secondary"
-              onClick={formik.handleSubmit}
-            >
-              Enviar
-            </Button>
-          </div>
-        </div>
-
-*/
