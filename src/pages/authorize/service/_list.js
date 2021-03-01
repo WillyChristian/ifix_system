@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import { useSession } from "next-auth/client";
-import { makeStyles, Button, Grid, TextField } from "@material-ui/core";
+import {
+	makeStyles,
+	Button,
+	Grid,
+	TextField,
+	Container,
+	Typography,
+} from "@material-ui/core";
 import {
 	Table,
 	TableBody,
@@ -10,6 +17,7 @@ import {
 	TableRow,
 	Paper,
 } from "@material-ui/core";
+
 import axios from "axios";
 
 //Components
@@ -22,7 +30,7 @@ const style = makeStyles({
 		flexDirection: "column",
 		justifyContent: "center",
 		alignItems: "start",
-		margin: 'auto'
+		margin: "auto",
 	},
 	search: {
 		display: "flex",
@@ -33,11 +41,7 @@ const style = makeStyles({
 	},
 	content: {
 		display: "flex",
-		flexDirection: "column",
 		width: "100%",
-		maxWidth: "700px",
-		height: "70vh",
-		padding: "2rem 0rem",
 		justifyContent: "center",
 		alignItems: "center",
 	},
@@ -90,7 +94,7 @@ const osForm = () => {
 						</Grid>
 					</div>
 					<div className={componentStyle.content}>
-						<TableContainer component={Paper}>
+						<TableContainer component={Container}>
 							<Table
 								className={componentStyle.table}
 								size='small'
@@ -98,28 +102,32 @@ const osForm = () => {
 							>
 								<TableHead>
 									<TableRow>
-										<TableCell align='right'>OS</TableCell>
-										<TableCell align='right'>
+										<TableCell align='center'>OS</TableCell>
+										<TableCell align='center'>
 											Nome do Cliente
 										</TableCell>
-										<TableCell align='right'>
+										<TableCell align='center'>
 											Data de Abertura
 										</TableCell>
-										<TableCell align='right'>Status da OS</TableCell>
+										<TableCell align='center'>Status da OS</TableCell>
 									</TableRow>
 								</TableHead>
 								<TableBody>
 									{rows.map((row) => (
-										<>
-											<TableCell align='right'>{row.os}</TableCell>
-											<TableCell align='right'>
-												{row.client}
+										<TableRow>
+											<TableCell align='center'>
+												<Typography>{row.os}</Typography>
 											</TableCell>
-											<TableCell align='right'>{row.date}</TableCell>
-											<TableCell align='right'>
-												{row.status}
+											<TableCell align='center'>
+												<Typography>{row.client}</Typography>
 											</TableCell>
-										</>
+											<TableCell align='center'>
+												<Typography>{row.date}</Typography>
+											</TableCell>
+											<TableCell align='center'>
+												<Typography>{row.status}</Typography>
+											</TableCell>
+										</TableRow>
 									))}
 								</TableBody>
 							</Table>

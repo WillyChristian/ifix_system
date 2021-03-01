@@ -1,8 +1,16 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
-import { Button, TextField, makeStyles, Typography } from "@material-ui/core";
+import { Button, TextField, makeStyles, Typography, Container} from "@material-ui/core";
 import { useSession } from "next-auth/client";
+
+//table
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
 
 //Component
 import Menu from "../../components/menu";
@@ -75,54 +83,60 @@ const Listar = () => {
 							/>
 							<Button onClick={getClientLIst}>Listar</Button>
 						</div>
-						<table>
-							<thead>
-								<tr className={listarStyle.trow}>
-									<th className={listarStyle.tcolumn}>
-										<Typography>#</Typography>
-									</th>
-									<th className={listarStyle.tcolumn}>
-										<Typography>ID</Typography>
-									</th>
-									<th className={listarStyle.tcolumn}>
-										<Typography>Nome</Typography>
-									</th>
-									<th className={listarStyle.tcolumn}>
-										<Typography>CPF</Typography>
-									</th>
-									<th className={listarStyle.tcolumn}></th>
-								</tr>
-							</thead>
-							{client?.map((event, id) => {
-								return (
-									<>
-										<tbody>
-											<tr className={listarStyle.trow}>
-												<td className={listarStyle.tcolumn}>
-													<Typography>{id}</Typography>
-												</td>
-												<td className={listarStyle.tcolumn}>
-													<Typography>{event._id}</Typography>
-												</td>
-												<td className={listarStyle.tcolumn}>
-													<Typography>{event.full_name}</Typography>
-												</td>
-												<td className={listarStyle.tcolumn}>
-													<Typography>{event.cpf}</Typography>
-												</td>
-												<td className={listarStyle.tcolumn}>
-													<Button
-														onClick={() => abrirOS(event._id)}
-													>
-														Abrir OS
-													</Button>
-												</td>
-											</tr>
-										</tbody>
-									</>
-								);
-							})}
-						</table>
+						<TableContainer component={Container}>
+							<Table>
+								<TableHead>
+									<TableRow className={listarStyle.trow}>
+										<TableCell align='center'>
+											<Typography>#</Typography>
+										</TableCell>
+										<TableCell align='center'>
+											<Typography>ID</Typography>
+										</TableCell>
+										<TableCell align='center'>
+											<Typography>Nome</Typography>
+										</TableCell>
+										<TableCell align='center'>
+											<Typography>CPF</Typography>
+										</TableCell>
+										<TableCell align='center'></TableCell>
+									</TableRow>
+								</TableHead>
+								{client?.map((event, id) => {
+									return (
+										<>
+											<TableBody>
+												<TableRow className={listarStyle.trow}>
+													<TableCell align='center'>
+														<Typography>{id}</Typography>
+													</TableCell>
+													<TableCell align='center'>
+														<Typography>{event._id}</Typography>
+													</TableCell>
+													<TableCell align='center'>
+														<Typography>
+															{event.full_name}
+														</Typography>
+													</TableCell>
+													<TableCell align='center'>
+														<Typography>{event.cpf}</Typography>
+													</TableCell>
+													<TableCell align='center'>
+														<Button
+															variant='contained'
+															color='secondary'
+															onClick={() => abrirOS(event._id)}
+														>
+															Abrir OS
+														</Button>
+													</TableCell>
+												</TableRow>
+											</TableBody>
+										</>
+									);
+								})}
+							</Table>
+						</TableContainer>
 					</div>
 				</>
 			);

@@ -76,18 +76,17 @@ const Cliente = () => {
 				city: "",
 				state: "",
 			},
-			onSubmit: (values) => {
-				alert(JSON.stringify(values, null, 2));
-				// SERA IPLEMENTADO APÓS CONCLUIR OS PROBLEMAS DO FORMULÁRIO
-				// const response = await fetch("/api/clients/create", {
-				// method: "POST",
-				// body: JSON.stringify(values)
-				// });
-				// if (response.status === 200) {
-				// 	alert("Cadastro Realizado!");
-				// } else {
-				// 	alert("Verifique os dados e tente novamente");
-				// }
+			onSubmit: async (values) => {
+				const response = await fetch("/api/clients/create", {
+				method: "POST",
+				body: JSON.stringify(values)
+				});
+				if (response.status === 200) {
+					alert("Cadastro Realizado!");
+					formik.resetForm()
+				} else {
+					alert("Verifique os dados e tente novamente");
+				}
 
 			},
 			validationSchema: Yup.object({
@@ -105,29 +104,30 @@ const Cliente = () => {
 			}),
 		});
 
-		const searchCep = () => {
-			const userCep = document.getElementById("cep").value;
-			if (!userCep) {
-				alert("Informe um CEP para pesquisa");
-			} else {
-				axios
-					.get(`https://viacep.com.br/ws/${userCep}/json/`)
-					.then((response) => {
-						const r = response.data;
-						if (r.erro) {
-							alert("O CEP digitado não existe");
-						} else {
-							setCep({
-								street: r.logradouro ,
-								neighbour: r.bairro,
-								city: r.localidade,
-								state: r.uf,
-							});
-						}
-					})
-					.catch((err) => alert(err));
-			}
-		};
+		// Futuramente, srá implementado o preenchimento automático dos campos baseados no cep.
+		// const searchCep = () => {
+		// 	const userCep = document.getElementById("cep").value;
+		// 	if (!userCep) {
+		// 		alert("Informe um CEP para pesquisa");
+		// 	} else {
+		// 		axios
+		// 			.get(`https://viacep.com.br/ws/${userCep}/json/`)
+		// 			.then((response) => {
+		// 				const r = response.data;
+		// 				if (r.erro) {
+		// 					alert("O CEP digitado não existe");
+		// 				} else {
+		// 					setCep({
+		// 						street: r.logradouro ,
+		// 						neighbour: r.bairro,
+		// 						city: r.localidade,
+		// 						state: r.uf,
+		// 					});
+		// 				}
+		// 			})
+		// 			.catch((err) => alert(err));
+		// 	}
+		// };
 		return (
 			<>
 				<Menu />
@@ -144,6 +144,7 @@ const Cliente = () => {
 								label='Nome Completo'
 								type='text'
 								variant='outlined'
+								value={formik.values.full_name}
 								fullWidth
 								onChange={formik.handleChange}
 								helperText={formik.errors.full_name}
@@ -152,6 +153,7 @@ const Cliente = () => {
 							<div className={formStyle.row}>
 								<div className={formStyle.row}>
 									<TextField
+										value={formik.values.cpf}
 										id='cpf'
 										label='CPF'
 										type='number'
@@ -166,6 +168,7 @@ const Cliente = () => {
 								</div>
 								<div className={formStyle.row}>
 									<TextField
+										value={formik.values.phone}
 										id='phone'
 										label='Celular'
 										type='text'
@@ -180,6 +183,7 @@ const Cliente = () => {
 							</div>
 							<div style={{ display: "flex", alignItems: "center" }}>
 								<TextField
+									value={formik.values.cep}
 									id='cep'
 									label='CEP'
 									type='number'
@@ -189,6 +193,7 @@ const Cliente = () => {
 									error={formik.errors.cep}
 								/>
 								<Button
+									disabled
 									variant='outlined'
 									size='small'
 									className={formStyle.button}
@@ -200,13 +205,15 @@ const Cliente = () => {
 							</div>
 							<div className={formStyle.row}>
 								<TextField
+									value={formik.values.street}
 									id='street'
-									value={cep.street}
+									label='Rua'
 									fullWidth
 									variant='outlined'
 									onChange={formik.handleChange}
 								/>
 								<TextField
+									value={formik.values.number}
 									id='number'
 									label='Número'
 									variant='outlined'
@@ -219,31 +226,35 @@ const Cliente = () => {
 							<div className={formStyle.row}>
 								<div className={formStyle.row}>
 									<TextField
+										value={formik.values.neighbour}
 										id='neighbour'
 										variant='outlined'
-										value={cep.neighbour}
+										label="Bairro"
 										onChange={formik.handleChange}
 									/>
 								</div>
 								<div className={formStyle.row}>
 									<TextField
+										value={formik.values.city}
 										id='city'
 										variant='outlined'
-										value={cep.city}
+										label='Cidade'
 										onChange={formik.handleChange}
 									/>
 								</div>
 								<div className={formStyle.row}>
 									<TextField
+										value={formik.values.state}
 										id='state'
 										variant='outlined'
 										onChange={formik.handleChange}
-										value={cep.state}
+										label="Estado"
 									/>
 								</div>
 							</div>
 							<Container>
 								<Button type='submit'>Cadastrar</Button>
+								<Button type='button' onClick={() => formik.resetForm()}>Limpar formulário</Button>
 							</Container>
 						</fieldset>
 					</form>

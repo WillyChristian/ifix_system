@@ -25,12 +25,14 @@ const Consulta = async (req, res) => {
 		// 		return;
 		// 	}
 		// }
+
 		// Busca por CPF
 		if (size === 11) {
+			const cpf = parseInt(params)
 			const { db } = await connectToDatabase();
 			const response = await db
 				.collection("clientes")
-				.find({ cpf: params })
+				.find({ cpf: cpf })
 				.toArray();
 			if (response.length === 0) {
 				res.status(400).json({
