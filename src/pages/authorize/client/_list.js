@@ -100,6 +100,7 @@ const Listar = () => {
 											<Typography>CPF</Typography>
 										</TableCell>
 										<TableCell align='center'></TableCell>
+										<TableCell align='center'></TableCell>
 									</TableRow>
 								</TableHead>
 								{client?.map((event, id) => {
@@ -124,10 +125,19 @@ const Listar = () => {
 													<TableCell align='center'>
 														<Button
 															variant='contained'
-															color='secondary'
-															onClick={() => abrirOS(event._id)}
-														>
+															color='primary'
+															onClick={() => alert('Função ainda por criar')}
+															>
 															Abrir OS
+														</Button>
+													</TableCell>
+													<TableCell align='center'>
+														<Button
+															color='secondary'
+															variant='contained'
+															onClick={() => alert('Função ainda por criar')}
+														>
+															Editar
 														</Button>
 													</TableCell>
 												</TableRow>

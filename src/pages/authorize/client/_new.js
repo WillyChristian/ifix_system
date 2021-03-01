@@ -253,7 +253,7 @@ const Cliente = () => {
 								</div>
 							</div>
 							<Container>
-								<Button type='submit'>Cadastrar</Button>
+								<Button type='submit' >Cadastrar</Button>
 								<Button type='button' onClick={() => formik.resetForm()}>Limpar formulário</Button>
 							</Container>
 						</fieldset>

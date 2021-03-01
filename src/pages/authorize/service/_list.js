@@ -5,7 +5,6 @@ import {
 	Button,
 	Grid,
 	TextField,
-	Container,
 	Typography,
 } from "@material-ui/core";
 import {
@@ -30,7 +29,6 @@ const style = makeStyles({
 		flexDirection: "column",
 		justifyContent: "center",
 		alignItems: "start",
-		margin: "auto",
 	},
 	search: {
 		display: "flex",
@@ -93,28 +91,25 @@ const osForm = () => {
 							<Button onClick={() => getListSo()}>Consulta</Button>
 						</Grid>
 					</div>
-					<div className={componentStyle.content}>
-						<TableContainer component={Container}>
-							<Table
-								className={componentStyle.table}
-								size='small'
-								aria-label='a dense table'
-							>
-								<TableHead>
-									<TableRow>
-										<TableCell align='center'>OS</TableCell>
-										<TableCell align='center'>
-											Nome do Cliente
-										</TableCell>
-										<TableCell align='center'>
-											Data de Abertura
-										</TableCell>
-										<TableCell align='center'>Status da OS</TableCell>
-									</TableRow>
-								</TableHead>
-								<TableBody>
-									{rows.map((row) => (
+
+					<TableContainer component={Paper}>
+						<Table>
+							<TableHead>
+								<TableRow>
+									<TableCell align='center'>#</TableCell>
+									<TableCell align='center'>OS</TableCell>
+									<TableCell align='center'>Nome do Cliente</TableCell>
+									<TableCell align='center'>Abertura</TableCell>
+									<TableCell align='center'>Status da OS</TableCell>
+									<TableCell align='center'></TableCell>
+									<TableCell align='center'></TableCell>
+								</TableRow>
+							</TableHead>
+							{rows?.map((row, id) => {
+								return (
+									<TableBody>
 										<TableRow>
+											<TableCell align='center'>{id}</TableCell>
 											<TableCell align='center'>
 												<Typography>{row.os}</Typography>
 											</TableCell>
@@ -127,12 +122,34 @@ const osForm = () => {
 											<TableCell align='center'>
 												<Typography>{row.status}</Typography>
 											</TableCell>
+											<TableCell align='center'>
+												<Button
+													variant='contained'
+													color='primary'
+													onClick={() =>
+														alert("Função ainda por criar")
+													}
+												>
+													Visualizar
+												</Button>
+											</TableCell>
+											<TableCell align='center'>
+												<Button
+													color='secondary'
+													variant='contained'
+													onClick={() =>
+														alert("Função ainda por criar")
+													}
+												>
+													Editar
+												</Button>
+											</TableCell>
 										</TableRow>
-									))}
-								</TableBody>
-							</Table>
-						</TableContainer>
-					</div>
+									</TableBody>
+								);
+							})}
+						</Table>
+					</TableContainer>
 				</div>
 			</>
 		);
