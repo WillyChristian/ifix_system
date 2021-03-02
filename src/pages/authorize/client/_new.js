@@ -103,31 +103,32 @@ const Cliente = () => {
 				number: Yup.string().required("Número é obrigatório"),
 			}),
 		});
-
-		// Futuramente, srá implementado o preenchimento automático dos campos baseados no cep.
-		// const searchCep = () => {
-		// 	const userCep = document.getElementById("cep").value;
-		// 	if (!userCep) {
-		// 		alert("Informe um CEP para pesquisa");
-		// 	} else {
-		// 		axios
-		// 			.get(`https://viacep.com.br/ws/${userCep}/json/`)
-		// 			.then((response) => {
-		// 				const r = response.data;
-		// 				if (r.erro) {
-		// 					alert("O CEP digitado não existe");
-		// 				} else {
-		// 					setCep({
-		// 						street: r.logradouro ,
-		// 						neighbour: r.bairro,
-		// 						city: r.localidade,
-		// 						state: r.uf,
-		// 					});
-		// 				}
-		// 			})
-		// 			.catch((err) => alert(err));
-		// 	}
-		// };
+/*
+		Futuramente, srá implementado o preenchimento automático dos campos baseados no cep.
+		const searchCep = () => {
+			const userCep = document.getElementById("cep").value;
+			if (!userCep) {
+				alert("Informe um CEP para pesquisa");
+			} else {
+				axios
+					.get(`https://viacep.com.br/ws/${userCep}/json/`)
+					.then((response) => {
+						const r = response.data;
+						if (r.erro) {
+							alert("O CEP digitado não existe");
+						} else {
+							setCep({
+								street: r.logradouro ,
+								neighbour: r.bairro,
+								city: r.localidade,
+								state: r.uf,
+							});
+						}
+					})
+					.catch((err) => alert(err));
+			}
+		};
+*/
 		return (
 			<>
 				<Menu />
