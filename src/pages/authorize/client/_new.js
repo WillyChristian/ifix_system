@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
 	Button,
 	makeStyles,
@@ -14,7 +14,7 @@ import Menu from "../../components/menu";
 import Login from "../../login/index";
 import axios from "axios";
 
-const style = makeStyles((theme) => ({
+const style = makeStyles(() => ({
 	container: {
 		height: "100vh",
 		width: "100%",
@@ -56,12 +56,7 @@ const Cliente = () => {
 
 	if (!session) return <Login />;
 	if (session) {
-		const [cep, setCep] = useState({
-			street: "",
-			neighbour: "",
-			city: "",
-			state: "",
-		});
+
 		const formStyle = style();
 		//Validacao do formulário
 		const formik = useFormik({
@@ -78,16 +73,15 @@ const Cliente = () => {
 			},
 			onSubmit: async (values) => {
 				const response = await fetch("/api/clients/create", {
-				method: "POST",
-				body: JSON.stringify(values)
+					method: "POST",
+					body: JSON.stringify(values),
 				});
 				if (response.status === 200) {
 					alert("Cadastro Realizado!");
-					formik.resetForm()
+					formik.resetForm();
 				} else {
 					alert("Verifique os dados e tente novamente");
 				}
-
 			},
 			validationSchema: Yup.object({
 				full_name: Yup.string()
@@ -99,12 +93,13 @@ const Cliente = () => {
 				phone: Yup.string()
 					.length(11, "Telefone deve conter 11 dígitos")
 					.required("Telefone é obrigatório"),
-				cep: Yup.string().length(8, "CEP deve conter 8 dígitos").required("CEP é obrigatório"),
+				cep: Yup.string()
+					.length(8, "CEP deve conter 8 dígitos")
+					.required("CEP é obrigatório"),
 				number: Yup.string().required("Número é obrigatório"),
 			}),
 		});
-/*
-		Futuramente, srá implementado o preenchimento automático dos campos baseados no cep.
+
 		const searchCep = () => {
 			const userCep = document.getElementById("cep").value;
 			if (!userCep) {
@@ -117,18 +112,16 @@ const Cliente = () => {
 						if (r.erro) {
 							alert("O CEP digitado não existe");
 						} else {
-							setCep({
-								street: r.logradouro ,
-								neighbour: r.bairro,
-								city: r.localidade,
-								state: r.uf,
-							});
+							formik.setFieldValue("street", r.logradouro);
+							formik.setFieldValue("neighbour", r.bairro);
+							formik.setFieldValue("city", r.localidade);
+							formik.setFieldValue("state", r.uf);
 						}
 					})
 					.catch((err) => alert(err));
 			}
 		};
-*/
+
 		return (
 			<>
 				<Menu />
@@ -194,7 +187,6 @@ const Cliente = () => {
 									error={formik.errors.cep}
 								/>
 								<Button
-									disabled
 									variant='outlined'
 									size='small'
 									className={formStyle.button}
@@ -221,7 +213,6 @@ const Cliente = () => {
 									onChange={formik.handleChange}
 									helperText={formik.errors.number}
 									error={formik.errors.number}
-									
 								/>
 							</div>
 							<div className={formStyle.row}>
@@ -230,7 +221,7 @@ const Cliente = () => {
 										value={formik.values.neighbour}
 										id='neighbour'
 										variant='outlined'
-										label="Bairro"
+										label='Bairro'
 										onChange={formik.handleChange}
 									/>
 								</div>
@@ -249,13 +240,18 @@ const Cliente = () => {
 										id='state'
 										variant='outlined'
 										onChange={formik.handleChange}
-										label="Estado"
+										label='Estado'
 									/>
 								</div>
 							</div>
 							<Container>
-								<Button type='submit' >Cadastrar</Button>
-								<Button type='button' onClick={() => formik.resetForm()}>Limpar formulário</Button>
+								<Button type='submit'>Cadastrar</Button>
+								<Button
+									type='button'
+									onClick={() => formik.resetForm()}
+								>
+									Limpar formulário
+								</Button>
 							</Container>
 						</fieldset>
 					</form>
