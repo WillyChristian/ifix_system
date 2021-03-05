@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import useSWR from "swr";
 import { useSession } from "next-auth/client";
 import {
-	Button,
+	MenuItem,
 	makeStyles,
 	TextField,
 	Typography,
@@ -10,6 +10,14 @@ import {
 	InputLabel,
 	Paper,
 	Divider,
+	Select,
+	Button,
+	TableContainer,
+	TableBody,
+	TableCell,
+	TableRow,
+	Table,
+	TableHead,
 } from "@material-ui/core";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -20,14 +28,15 @@ import Error from "../../components/error";
 import LoadPage from "../../components/error";
 import Login from "../../login/index";
 
-// Função para trazer os funcionários do BD
+// Função para trazer os dados do BD
 const fetcher = (url) => fetch(url).then((r) => r.json());
+const getProducts = (url) => fetch(url).then((r) => r.json());
 
 // Função para gerar os estilos
 const styles = makeStyles({
 	main: {
 		width: "100%",
-		height: "150vh",
+		height: "250vh",
 	},
 	divClient: {
 		padding: "1rem",
@@ -135,6 +144,14 @@ const styles = makeStyles({
 const _new = () => {
 	// Verificar se o usuário esta logado
 	const [session] = useSession();
+	const { data: products } = useSWR("../../api/products/read", getProducts);
+	const [parts, setParts] = useState([
+		{
+			qtd: "",
+			peca: "",
+			preco: "",
+		},
+	]);
 
 	// Variável de estilo
 	const formStyles = styles();
@@ -142,7 +159,21 @@ const _new = () => {
 	//Validação do Formulário
 	const formik = useFormik({
 		initialValues: {
-			//dados do formulário
+			nome: "",
+			cpf: "",
+			email: "",
+			phone_home: "",
+			cellphone: "",
+			brand: "",
+			model:"",
+			color:"",
+			capacity:"",
+			sn:"",
+			carcaca:"",
+			camera:"",
+			sound:"",
+			microfone:"",
+			rede:"",
 		},
 		onSubmit: {
 			//Salva os dados no banco
@@ -153,26 +184,51 @@ const _new = () => {
 	});
 
 	// Carrega todos os funcionários no BD
-	const { data, error } = useSWR("../../api/employee/_read", fetcher);
+	const { data: employee, error } = useSWR(
+		"../../api/employee/_read",
+		fetcher
+	);
+
+	/* Pesquisa cliente por CPF */
+	const searchById = async () => {
+		const _id = document.querySelector("#cpf").value;
+		axios
+			.get(`../api/clients/${_id}`)
+			.then((response) => {
+				const data = response.data[0];
+				setClient({ ...data });
+			})
+			.catch((err) => console.log(err));
+	};
+
+	const handleChangeSelect = (event) => {
+		const value = event.target.value;
+		if (event.target.name === "parts") {
+			setParts({
+				...parts,
+				peca: value,
+			});
+		}
+		if (event.target.name === "qtd") {
+			setParts({
+				...parts,
+				qtd: value,
+			});
+		}
+		if (event.target.name === "preco") {
+			setParts({
+				...parts,
+				preco: value,
+			});
+		}
+	};
 
 	//Verifica se há uma sessão ativa e rotona à página login caso não haja
 	if (!session) return <Login />;
 	if (session) {
-		/* Pesquisa cliente por CPF */
-		const searchById = async () => {
-			const _id = document.querySelector("#cpf").value;
-			axios
-				.get(`../api/clients/${_id}`)
-				.then((response) => {
-					const data = response.data[0];
-					setClient({ ...data });
-				})
-				.catch((err) => console.log(err));
-		};
-
 		//Caso haja erro ao carregar os dados do banco redireciona à uma página de erro
 		if (error) return <Error />;
-		if (!data) return <LoadPage />;
+		if (!employee) return <LoadPage />;
 
 		return (
 			<>
@@ -187,17 +243,31 @@ const _new = () => {
 									</Typography>
 								</legend>
 								<div id='divisor'>
-									<TextField type='text' placeholder='Nome' />
-									<TextField type='text' placeholder='CPF' />
-									<TextField type='text' placeholder='E-mail' />
+									<TextField
+										type='text'
+										placeholder='Nome'
+										name='nome'
+									/>
+									<TextField
+										type='text'
+										placeholder='CPF'
+										name='cpf'
+									/>
+									<TextField
+										type='text'
+										placeholder='E-mail'
+										name='email'
+									/>
 								</div>
 								<div id='divisor'>
 									<TextField
+										name='phone_home'
 										type='text'
 										placeholder='Telefone Residencial'
 									/>
 									<TextField type='text' placeholder='Celular' />
 									<TextField
+										name='cellphone'
 										type='text'
 										placeholder='Telefone Residencial'
 									/>
@@ -213,13 +283,13 @@ const _new = () => {
 									</Typography>
 								</legend>
 								<div id='divisor'>
-									<TextField type='text' placeholder='marca' />
-									<TextField type='text' placeholder='modelo' />
+									<TextField type='text' placeholder='marca' name="brand" />
+									<TextField type='text' placeholder='modelo' name="model"/>
 								</div>
 								<div id='divisor'>
-									<TextField type='text' placeholder='cor' />
-									<TextField type='text' placeholder='memória' />
-									<TextField type='text' placeholder='serial' />
+									<TextField type='text' placeholder='cor' name="color" />
+									<TextField type='text' placeholder='memória' name="capacity"/>
+									<TextField type='text' placeholder='Número de Série' name="sn"/>
 								</div>
 							</Paper>
 						</Container>
@@ -392,9 +462,107 @@ const _new = () => {
 								</div>
 							</Paper>
 						</Container>
-						<div className='parts'>
-							
-						</div>
+						<Container className={formStyles.divCondition}>
+							<Paper elevation={3}>
+								<div id='divisor'>
+									<div id='sub-divisor'>
+										<InputLabel id='select-part'>
+											Selecione a peça
+										</InputLabel>
+										<Select
+											id='selected'
+											onChange={handleChangeSelect}
+											labelId='select-part'
+											name='parts'
+										>
+											{products?.map((p) => {
+												return (
+													<MenuItem
+														name='parts'
+														value={`${p.part} ${p.model} ${p.color}`}
+													>
+														{p.part} {p.model} {p.color}
+													</MenuItem>
+												);
+											})}
+										</Select>
+									</div>
+
+									<div id='sub-divider'>
+										<InputLabel htmlFor='qtd'>Valor</InputLabel>
+										<TextField
+											onChange={handleChangeSelect}
+											name='preco'
+										/>
+									</div>
+									<div id='sub-divider'>
+										<InputLabel htmlFor='qtd'>Quantidade</InputLabel>
+										<TextField
+											onChange={handleChangeSelect}
+											name='qtd'
+										/>
+									</div>
+								</div>
+								<div id='divisor'>
+									<Button onClick={() => addPart()}>Cadastrar</Button>
+								</div>
+								<div id='divisor'>
+									<TableContainer component={Paper}>
+										<Table>
+											<TableHead>
+												<TableRow>
+													<TableCell align='center'>
+														<Typography>#</Typography>
+													</TableCell>
+													<TableCell align='center'>
+														<Typography>Peça</Typography>
+													</TableCell>
+													<TableCell align='center'>
+														<Typography>Quantidade</Typography>
+													</TableCell>
+													<TableCell align='center'>
+														<Typography>
+															Preço (unitário)
+														</Typography>
+													</TableCell>
+												</TableRow>
+											</TableHead>
+
+											<TableBody>
+												{parts?.map((r, key) => {
+													return (
+														<p>oi </p>
+														// <TableRow>
+														// 	<TableCell align='center'>
+														// 		<Typography>
+														// 			{key}
+														// 		</Typography>
+														// 	</TableCell>
+
+														// 	<TableCell align='center'>
+														// 		<Typography>
+														// 			{r.peca}
+														// 		</Typography>
+														// 	</TableCell>
+														// 	<TableCell align='center'>
+														// 		<Typography>
+														// 			{r.qtd}
+														// 		</Typography>
+														// 	</TableCell>
+														// 	<TableCell align='center'>
+														// 		<Typography>
+														// 			{r.preco}
+														// 		</Typography>
+														// 	</TableCell>
+														// </TableRow>
+													);
+												})}
+											</TableBody>
+										</Table>
+									</TableContainer>
+								</div>
+							</Paper>
+						</Container>
 					</form>
 				</div>
 			</>
