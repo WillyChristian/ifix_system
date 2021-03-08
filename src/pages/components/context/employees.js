@@ -4,8 +4,8 @@ import { createContext, useState, useEffect } from "react";
 export const EmployeesContext = createContext(null);
 
 export function MyContext({children}){
-    const [tec, setTec] = useState()
-    const [att, setAtt] = useState()
+    const [tec, setTec] = useState([])
+    const [att, setAtt] = useState([])
 
     useEffect(()=>{
         axios
