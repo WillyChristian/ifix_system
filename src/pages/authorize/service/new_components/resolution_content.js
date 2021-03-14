@@ -30,7 +30,7 @@ function ResolutionContent({ ...props }) {
           <InputLabel htmlFor="tec-list">Técnico Responsável</InputLabel>
           <Select id="tec-list">
             {
-                console.log(tec)
+              
             /* {tec.map( t => {
                 <MenuItem value={t.name}>{t.name}</MenuItem>
             })} */}

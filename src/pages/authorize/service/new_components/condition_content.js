@@ -91,7 +91,7 @@ function ConditionsContent({ ...props }) {
 						rows={5}
 						placeholder='WiFi, Operadora e Bluetooth'
                         onChange={handleChange}
-                        value={values.brand}
+                        value={values.network}
 					/>
 				</div>
 				<div id='sub-divisor'>
