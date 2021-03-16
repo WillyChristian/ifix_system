@@ -9,7 +9,7 @@ import {
 	InputLabel,
 	Paper,
 	Divider,
-  Button,
+	Button,
 } from "@material-ui/core";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -103,12 +103,18 @@ const _new = () => {
 			sound: "",
 			microfone: "",
 			network: "",
+			other: "",
+			entry:"",
+			withdrawal:"",
 			prob_descrpt: "",
-      parts:[],
+			attendant: "",
+			parts: [],
 		},
-		onSubmit:(values) => {
-			//Salva os dados no banco
-      alert(JSON.stringify(values, null, 2))
+		onSubmit: async (values) => {
+			const response = await fetch("/api/service_orders/_create", {
+				method: "POST",
+				body: JSON.stringify(values),
+			});
 		},
 		validationSchema: Yup.object({
 			//Validação dos campos preenchidos
@@ -125,7 +131,6 @@ const _new = () => {
 				<Menu />
 				<div className={formStyles.main}>
 					<form action={formik.handleSubmit}>
-            
 						<Container className={formStyles.div}>
 							<Paper elevation={3}>
 								<ClientContent
@@ -170,21 +175,21 @@ const _new = () => {
 								</legend>
 								<div id='divisor'>
 									<div>
-										<InputLabel htmlFor='in'>
+										<InputLabel htmlFor='entry'>
 											Data e hora de Enstrada
 										</InputLabel>
-										<TextField type='datetime-local' />
+										<TextField name="entry" type='datetime-local' onChange={formik.handleChange}/>
 									</div>
 									<div>
-										<InputLabel htmlFor='in'>
+										<InputLabel htmlFor='withdrawal'>
 											Data e hora de entrega
 										</InputLabel>
-										<TextField type='datetime-local' />
+										<TextField name="withdrawal" type='datetime-local' onChange={formik.handleChange} />
 									</div>
 								</div>
 							</Paper>
 						</Container>
-						<Divider />
+						{/* <Divider />
 						<Typography variant={"h4"}>Parte Técnica</Typography>
 						<Divider />
 						<Container className={formStyles.div}>
@@ -200,17 +205,17 @@ const _new = () => {
 							<Paper elevation={3}>
 								<PartsContent
 									prod={products}
-                  part={parts}
+									part={parts}
 									update={setParts}
 									handleChange={formik.handleChange}
 									values={formik.values}
 									setFields={formik.setFieldValue}
 								/>
 							</Paper>
+						</Container> */}
+						<Container>
+							<button type="submit" onClick={formik.handleSubmit}>Enviar</button>
 						</Container>
-            <Container>
-              <Button type="submit">Enviar</Button>
-            </Container>
 					</form>
 				</div>
 			</>

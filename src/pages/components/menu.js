@@ -39,16 +39,16 @@ const Menu = () => {
         <Link href="/">
           <a className={menuStyles.a}> HOME </a>
         </Link>
-        <Link href="/authorize/service/_new">
+        <Link href="/authorize/service/new">
           <a className={menuStyles.a}> Cadastrar OS </a>
         </Link>
-        <Link href="/authorize/service/_list">
+        <Link href="/authorize/service/list">
           <a className={menuStyles.a}> Consulta OS</a>
         </Link>
-        <Link href="/authorize/client/_new">
+        <Link href="/authorize/client/new">
           <a className={menuStyles.a}> Cadastrar Cliente </a>
         </Link>
-        <Link href="/authorize/client/_list">
+        <Link href="/authorize/client/list">
           <a className={menuStyles.a}> Consultar Cliente </a>
         </Link>
       </ul>

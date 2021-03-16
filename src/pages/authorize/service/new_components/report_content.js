@@ -18,7 +18,7 @@ const styles = makeStyles({
 });
 
 function ReportContent({ ...props }) {
-	const { handleChange, values, setFields } = props;
+	const { handleChange, values } = props;
 	const formStyles = styles();
 	const att = useContext(EmployeesContext);
 
@@ -39,13 +39,16 @@ function ReportContent({ ...props }) {
 					value={values.prob_descrpt}
 				/>
 				<div className={formStyles.divisor	}>
-					<InputLabel htmlFor='attendant'>
+					<InputLabel htmlFor='attendant' >
 						Atentendente Responsável
 					</InputLabel>
 					<Select
+						defaultValue=""
 						labelId="attendant"
-						id="select"
+						name="attendant"
+						onChange={handleChange}
 					>
+						
 						<MenuItem value={att.att.name}>{att.att.name}</MenuItem>
 					</Select>
 				</div>

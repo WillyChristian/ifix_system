@@ -72,7 +72,7 @@ const Cliente = () => {
 				state: "",
 			},
 			onSubmit: async (values) => {
-				const response = await fetch("/api/clients/create", {
+				const response = await fetch("/api/clients/_create", {
 					method: "POST",
 					body: JSON.stringify(values),
 				});
