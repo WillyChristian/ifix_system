@@ -10,16 +10,25 @@ const style = makeStyles({
     justifyContent: "space-around",
     alignItems: "center",
     height: "70px",
-    backgroundColor: "#9a9a9a",
+    backgroundColor: "#444444",
+    borderBottom: "4px solid #f9c400",
+    fontSize: "large",
   },
   ul: {
     display: "flex",
     listStyleType: "none",
+    "& :hover": {
+      backgroundColor: "#f9c400",
+      color: "#9e7b00",
+    },
   },
   a: {
+    padding: "10px",
+    borderRadius: "5px",
     margin: "0px 0.5rem",
     listStyle: "none",
-    color: "#000",
+    textDecoration: "none",
+    color: "#fff",
   },
   login: {
     float: "right",
@@ -39,7 +48,7 @@ const Menu = () => {
         <Link href="/">
           <a className={menuStyles.a}> HOME </a>
         </Link>
-        <Link href="/authorize/service/new">
+        <Link href="/authorize/service/new_service/">
           <a className={menuStyles.a}> Cadastrar OS </a>
         </Link>
         <Link href="/authorize/service/list">
@@ -50,6 +59,9 @@ const Menu = () => {
         </Link>
         <Link href="/authorize/client/list">
           <a className={menuStyles.a}> Consultar Cliente </a>
+        </Link>
+        <Link href="/authorize/part/">
+          <a className={menuStyles.a}>Peças </a>
         </Link>
       </ul>
       <div className={menuStyles.login}>

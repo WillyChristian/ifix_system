@@ -1,5 +1,16 @@
-function Parts(){
-    return <p>PARTS</p>
+import React from "react";
+import Menu from "../../components/menu";
+import Frame from "../../components/frame";
+
+function Parts() {
+  return (
+    <div>
+      <Menu />
+      <Frame>
+        <p>PARTS teste</p>
+      </Frame>
+    </div>
+  );
 }
 
-export default Parts
+export default Parts;
