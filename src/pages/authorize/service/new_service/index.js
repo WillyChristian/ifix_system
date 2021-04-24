@@ -5,15 +5,18 @@ import Typography from "@material-ui/core/Typography";
 import Frame from "../../../components/frame";
 import Menu from "../../../components/menu";
 import newServiceStyle from "./components/style";
+import Formik from "./components/source";
 
 export default function NewService() {
   const style = newServiceStyle();
+  const formik = Formik();
+
   return (
     <div>
       <Menu />
       <Frame>
         <div className="header">{/*  AQUI VAI UM CABEÇALHO COM LOGO */}</div>
-        <form className={style.root}>
+        <form className={style.root} onSubmit={formik.handleSubmit}>
           <fieldset className={style.fieldset}>
             <legend>
               <Typography variant="h4">Orden de Serviço</Typography>
@@ -24,19 +27,64 @@ export default function NewService() {
                   label="Orden de Serviço"
                   name="service"
                   id="service"
+                  value={formik.values.service}
+                  onChange={formik.handleChange}
+                  // helperText={formik.errors.service}
+                  // error={formik.errors.service}
+                  InputProps={{
+                    style: {
+                      width: "120px",
+                    },
+                  }}
                 />
                 <TextField
                   size="large"
                   label="Nome do Cliente"
-                  InputProps={{ style: { width: "300px" } }}
+                  name="client_name"
+                  id="client_name"
+                  InputProps={{ style: { width: "250px" } }}
+                  value={formik.values.client_name}
+                  onChange={formik.handleChange}
                 />
-                <TextField label="Data" name="date" id="date" />
+                <TextField
+                  label="Data"
+                  name="date"
+                  id="date"
+                  value={formik.values.date}
+                  onChange={formik.handleChange}
+                />
+                <TextField
+                  size="large"
+                  label="Status"
+                  name="status"
+                  id="status"
+                  value={formik.values.status}
+                  onChange={formik.handleChange}
+                />
               </div>
               <div>
-                <TextField label="Aparelho" name="device" id="device" />
-                <TextField label="Cor" name="color" id="colo" />
-                <TextField label="Capacidade" name="storage" id="storage" />
-                <TextField label="IMEI" />
+                <TextField
+                  label="Aparelho"
+                  name="device"
+                  id="device"
+                  value={formik.values.device}
+                  onChange={formik.handleChange}
+                />
+                <TextField label="Cor" name="color" id="color" />
+                <TextField
+                  label="Capacidade"
+                  name="storage"
+                  id="storage"
+                  value={formik.values.storage}
+                  onChange={formik.handleChange}
+                />
+                <TextField
+                  label="IMEI"
+                  name="imei"
+                  id="imei"
+                  value={formik.values.imei}
+                  onChange={formik.handleChange}
+                />
               </div>
             </div>
           </fieldset>
@@ -50,47 +98,83 @@ export default function NewService() {
                 <div>
                   <TextField
                     label="Atendente"
-                    name="atendente"
-                    id="atendente"
+                    name="attendant"
+                    id="attendant"
                     fullWidth
+                    value={formik.values.attendant}
+                    onChange={formik.handleChange}
                   />
                 </div>
                 <div>
-                  <TextField label="Botão Home" name="home" id="home" />
-                  <TextField label="TouchID" name="touchid" id="touchid" />
+                  <TextField
+                    label="Botão Home"
+                    name="home"
+                    id="home"
+                    value={formik.values.home}
+                    onChange={formik.handleChange}
+                  />
+                  <TextField
+                    label="TouchID / FaceID"
+                    name="touchid"
+                    id="touchid"
+                    value={formik.values.touchid}
+                    onChange={formik.handleChange}
+                  />
                 </div>
                 <div>
                   <TextField
                     label="Câmera Traseira"
                     name="cam_tras"
                     id="cam_tras"
+                    value={formik.values.cam_tras}
+                    onChange={formik.handleChange}
                   />
                   <TextField
                     label="Foco da Camera"
                     name="cam_tras_foco"
                     id="cam_tras_foco"
+                    value={formik.values.cam_tras_foco}
+                    onChange={formik.handleChange}
                   />
-                  <TextField label="Flash" name="flash" id="flash" />
+                  <TextField
+                    label="Flash"
+                    name="flash"
+                    id="flash"
+                    value={formik.values.flash}
+                    onChange={formik.handleChange}
+                  />
                 </div>
                 <div>
-                  <TextField label="Carcaça" name="carcaca" id="carcaca" />
+                  <TextField
+                    label="Carcaça"
+                    name="rear_case"
+                    id="rear_case"
+                    value={formik.values.rear_case}
+                    onChange={formik.handleChange}
+                  />
                   <TextField
                     label="Parafusos Externos"
-                    name="paraf_ext"
-                    id="paraf_ext"
+                    name="screws"
+                    id="screws"
+                    value={formik.values.screws}
+                    onChange={formik.handleChange}
                   />
                 </div>
                 <div>
                   <TextField
                     label="Micorfones"
-                    name="microfones"
-                    id="microfones"
+                    name="microphones"
+                    id="microphones"
                     placeholder="ligação, câmeras, etc."
+                    value={formik.values.microphones}
+                    onChange={formik.handleChange}
                   />
                   <TextField
                     label="Auricular / Auto-falante"
-                    name="caixa-som"
-                    id="caixa-som"
+                    name="speakers"
+                    id="speakers"
+                    value={formik.values.speakers}
+                    onChange={formik.handleChange}
                   />
                 </div>
               </div>
@@ -102,47 +186,79 @@ export default function NewService() {
                     name="ligou"
                     id="ligou"
                     fullWidth
+                    value={formik.values.ligou}
+                    onChange={formik.handleChange}
                   />
                 </div>
                 <div>
                   <TextField
                     label="Volume e Vibra"
-                    name="volume_vibra"
-                    id="volume_vibra"
+                    name="vibracall"
+                    id="vibracall"
+                    value={formik.values.vibracall}
+                    onChange={formik.handleChange}
                   />
-                  <TextField label="Botão Power" name="power" id="power" />
+                  <TextField
+                    label="Botão Power"
+                    name="power_btn"
+                    id="power_btn"
+                    value={formik.values.power_btn}
+                    onChange={formik.handleChange}
+                  />
                 </div>
                 <div>
                   <TextField
                     label="Câmera Frontal"
-                    name="cam_fron"
-                    id="cam_fron"
+                    name="front_cam"
+                    id="front_cam"
+                    value={formik.values.front_cam}
+                    onChange={formik.handleChange}
                   />
                   <TextField
                     label="Foco da Câmera Frontal "
-                    name="cam_fron_foco"
-                    id="cam_fron_foco"
+                    name="front_cam_foco"
+                    id="front_cam_foco"
+                    value={formik.values.front_cam_foco}
+                    onChange={formik.handleChange}
                   />
                 </div>
                 <div>
-                  <TextField label="Wi-fi" name="wifi" id="wifi" />
+                  <TextField
+                    label="Wi-fi"
+                    name="wifi"
+                    id="wifi"
+                    value={formik.values.wifi}
+                    onChange={formik.handleChange}
+                  />
                   <TextField
                     label="Bluetooth"
                     name="bluetooth"
                     id="bluetooth"
+                    value={formik.values.bluetooth}
+                    onChange={formik.handleChange}
                   />
-                  <TextField label="Cartão SIM" name="chip" id="chip" />
+                  <TextField
+                    label="Cartão SIM"
+                    name="sim"
+                    id="sim"
+                    value={formik.values.sim}
+                    onChange={formik.handleChange}
+                  />
                 </div>
                 <div>
                   <TextField
                     label="Dock / Carregamento"
                     name="dock"
                     id="dock"
+                    value={formik.values.dock}
+                    onChange={formik.handleChange}
                   />
                   <TextField
                     label="Cartão de Memória"
-                    name="memory_card"
-                    id="memory_card"
+                    name="memory_sd"
+                    id="memory_sd"
+                    value={formik.values.memory_sd}
+                    onChange={formik.handleChange}
                   />
                 </div>
               </div>
@@ -151,15 +267,21 @@ export default function NewService() {
           <fieldset className={style.fieldset}>
             <div className={style.main}>
               <TextField
-                variant="outlined"
                 label="Defeito Reportado pelo cliente"
+                name="defect"
+                id="defect"
+                variant="outlined"
                 multiline
                 rows={5}
                 InputProps={{ style: { width: "300px" } }}
+                value={formik.values.defect}
+                onChange={formik.handleChange}
               />
               <TextField
-                variant="outlined"
                 label="Reparo executado pelo técnico"
+                name="repair"
+                id="repair"
+                variant="outlined"
                 multiline
                 rows={5}
                 InputProps={{
@@ -167,9 +289,14 @@ export default function NewService() {
                     width: "300px",
                   },
                 }}
+                value={formik.values.repair}
+                onChange={formik.handleChange}
               />
             </div>
           </fieldset>
+          <div className="container">
+            <button type="submit">Enviar</button>
+          </div>
         </form>
       </Frame>
     </div>
