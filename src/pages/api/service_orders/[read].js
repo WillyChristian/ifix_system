@@ -15,5 +15,6 @@ export default async (req, res) => {
     res.status(400).end({
       message: "Bad request. Verify the method and try again",
     });
+    res.send(JSON.stringify(numOs));
   }
 };

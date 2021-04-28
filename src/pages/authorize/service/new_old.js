@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import useSWR from "swr";
-import { useSession } from "next-auth/client";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
@@ -12,7 +11,7 @@ const getProducts = (url) => fetch(url).then((r) => r.json());
 
 const _new = () => {
   // Verificar se o usuário esta logado
-  const [session] = useSession();
+
   // const { data: products } = useSWR("../../api/products/read", getProducts); //Lista os produtos do BD
   const { data: employee } = useSWR("../../api/employee/_read", fetcher); // Lista os funcionários bo BD
   // const [parts, setParts] = useState([
@@ -62,8 +61,7 @@ const _new = () => {
   const layout = Layout();
 
   //Verifica se há uma sessão ativa e rotona à página login caso não haja
-  if (!session) return <Login />;
-  if (session) {
+
     if (!employee) return <LoadPage />;
 
     return (
