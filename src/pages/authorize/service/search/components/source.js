@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useState } from "react";
 
 const searchSO = (props) => {
   const data = axios
@@ -7,4 +8,6 @@ const searchSO = (props) => {
   console.log(data);
 };
 
-export { searchSO };
+const getService = () => {};
+
+export { searchSO, getService };

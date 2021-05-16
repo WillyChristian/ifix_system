@@ -9,8 +9,7 @@ import Frame from "../../../components/frame";
 import Menu from "../../../components/menu";
 import Login from "../../../login/index";
 import newServiceStyle from "./components/style";
-import Formik from "./components/source";
-import axios from "axios";
+import { Formik, getOS } from "./components/source";
 
 export default function NewService() {
   const [session] = useSession();
@@ -35,7 +34,6 @@ export default function NewService() {
                     label="Orden de Serviço"
                     name="service"
                     id="service"
-                    disabled
                     value={formik.values.service}
                     onChange={formik.handleChange}
                     InputProps={{
@@ -57,6 +55,7 @@ export default function NewService() {
                     label="Data"
                     name="date"
                     id="date"
+                    disabled
                     value={formik.values.date}
                     onChange={formik.handleChange}
                   />
