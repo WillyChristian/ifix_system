@@ -1,6 +1,7 @@
 import React from "react";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
 import { useSession } from "next-auth/client";
 
 // Componentes
@@ -9,6 +10,7 @@ import Menu from "../../../components/menu";
 import Login from "../../../login/index";
 import newServiceStyle from "./components/style";
 import Formik from "./components/source";
+import axios from "axios";
 
 export default function NewService() {
   const [session] = useSession();
@@ -33,10 +35,9 @@ export default function NewService() {
                     label="Orden de Serviço"
                     name="service"
                     id="service"
+                    disabled
                     value={formik.values.service}
                     onChange={formik.handleChange}
-                    // helperText={formik.errors.service}
-                    // error={formik.errors.service}
                     InputProps={{
                       style: {
                         width: "120px",
@@ -76,7 +77,13 @@ export default function NewService() {
                     value={formik.values.device}
                     onChange={formik.handleChange}
                   />
-                  <TextField label="Cor" name="color" id="color" />
+                  <TextField
+                    label="Cor"
+                    name="color"
+                    id="color"
+                    value={formik.values.color}
+                    onChange={formik.handleChange}
+                  />
                   <TextField
                     label="Capacidade"
                     name="storage"
@@ -300,9 +307,26 @@ export default function NewService() {
                 />
               </div>
             </fieldset>
-            <div className="container">
-              <button type="submit">Enviar</button>
-            </div>
+            <fieldset className={style.fieldset}>
+              <div className={style.main}>
+                <Button
+                  className={style.btn}
+                  variant="contained"
+                  color="primary"
+                  type="submit"
+                >
+                  Cadastrar
+                </Button>
+                <Button
+                  className={style.btn}
+                  variant="contained"
+                  color="primary"
+                  onClick={formik.resetForm}
+                >
+                  Limpar
+                </Button>
+              </div>
+            </fieldset>
           </form>
         </Frame>
       </div>

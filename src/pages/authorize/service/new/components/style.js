@@ -16,6 +16,9 @@ const newServiceStyle = makeStyles((theme) => ({
     border: "2px solid",
     padding: "1rem",
   },
+  btn: {
+    margin: "0rem 1rem",
+  },
 }));
 
 export default newServiceStyle;
