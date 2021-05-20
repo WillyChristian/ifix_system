@@ -1,16 +1,31 @@
 import { makeStyles } from "@material-ui/core";
 
 const SearchStyle = makeStyles({
-  container: {
-    height: "100px",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+  main:{
+    display:"flex",
+    flexDirection:"column",
+    width:"100%"
   },
-  line: {
-    display: "flex",
-    justifyContent: "center",
+  header: {
+    height: "5rem",
+    width: "100%",
+    padding:"1rem",
+    margin:"1rem",
+    display:"flex",
+    flexDirection:"column",
+    justifyContent: "space-around",
+    alignItems:"center"
   },
+  container:{
+    width: "95%",
+    padding:"1rem",
+    margin:"1rem",
+    display:"flex",
+    flexDirection:"column",
+    justifyContent: "space-around",
+    alignItems:"center"
+  },
+
 });
 
 export default SearchStyle;

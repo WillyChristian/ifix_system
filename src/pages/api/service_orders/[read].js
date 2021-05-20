@@ -9,8 +9,8 @@ export default async (req, res) => {
       .collection("service_order")
       .find({ service: numOs })
       .toArray();
-
-    res.status(200).send(resultSearch);
+    const os = resultSearch[0];
+    res.status(200).json(os);
   } else {
     res.status(400).end({
       message: "Bad request. Verify the method and try again",
