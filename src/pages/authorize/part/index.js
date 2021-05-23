@@ -7,7 +7,7 @@ function Parts() {
     <div>
       <Menu />
       <Frame>
-        <p>PARTS teste</p>
+       
       </Frame>
     </div>
   );
