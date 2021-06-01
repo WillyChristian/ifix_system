@@ -1,5 +1,6 @@
 import React from "react";
 import { useSession } from "next-auth/client";
+import { ButtonGroup, Button, TextField } from "@material-ui/core";
 
 // General Componentes
 import Frame from "../../../components/frame";
@@ -8,8 +9,8 @@ import Login from "../../../login/index";
 
 //Internal components
 import SearchStyle from "./components/style";
-import {digzOla} from './components/source'
-import CollapsibleTable from './components/table'
+import { getData } from "./components/source";
+import CollapsibleTable from "./components/table";
 
 const SearchOS = () => {
   const [session] = useSession();
@@ -23,9 +24,37 @@ const SearchOS = () => {
         <Frame>
           <div className={style.main}>
             <div className={style.header}>
-              <label htmlFor="busca">Busca de OS</label>
-              <input type="number" />
-              <button onClick={digzOla}>Buscar</button>
+              <TextField
+                className="inpt"
+                id="os"
+                label="Numero da OS"
+                name="os"
+                variant="outlined"
+              />
+              <TextField
+                className="inpt"
+                id="cpf"
+                label="CPF"
+                name="cpf"
+                variant="outlined"
+              />
+              <TextField
+                className="inpt"
+                id="name"
+                label="Nome"
+                name="name"
+                variant="outlined"
+              />
+            </div>
+            <div className={style.sub_header}>
+              <ButtonGroup variant="outlined">
+                <Button className="btn" onClick={getData}>
+                  Buscar
+                </Button>
+                <Button className="btn" onClick={getData}>
+                  Limpar
+                </Button>
+              </ButtonGroup>
             </div>
             <div className={style.container}>
               <CollapsibleTable />
